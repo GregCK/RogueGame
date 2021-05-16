@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World/Rock.gd" type="Script" id=1]
+[ext_resource path="res://World/Hole.gd" type="Script" id=2]
+[ext_resource path="res://World/Rock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Hole.tscn" type="PackedScene" id=4]
+
+[node name="Inside" type="Node2D"]
+
+[node name="Rock" type="StaticBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 128, 80 )
+script = ExtResource( 1 )
+
+[node name="Hole" type="StaticBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 176, 112 )
+script = ExtResource( 2 )

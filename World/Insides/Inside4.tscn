@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://World/Rock.gd" type="Script" id=1]
+[ext_resource path="res://World/Rock.tscn" type="PackedScene" id=2]
+
+[node name="Inside" type="Node2D"]
+
+[node name="Rock" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 128, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock2" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 144, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock3" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock4" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 176, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock5" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 192, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock6" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 208, 64 )
+script = ExtResource( 1 )
+
+[node name="Rock7" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 128, 144 )
+script = ExtResource( 1 )
+
+[node name="Rock8" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 144, 144 )
+script = ExtResource( 1 )
+
+[node name="Rock9" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, 144 )
+script = ExtResource( 1 )
+
+[node name="Rock10" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 176, 144 )
+script = ExtResource( 1 )
+
+[node name="Rock11" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 192, 144 )
+script = ExtResource( 1 )
+
+[node name="Rock12" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 208, 144 )
+script = ExtResource( 1 )

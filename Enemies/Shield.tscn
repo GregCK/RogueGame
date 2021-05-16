@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Enemies/BigShieldRight.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/BigShieldLeft.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/BigShieldFront.png" type="Texture" id=3]
+[ext_resource path="res://Enemies/BigShieldBack.png" type="Texture" id=4]
+[ext_resource path="res://Enemies/Shield.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/ShieldSide.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 4.75652
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 5.50568
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 3.6853
+height = 13.2199
+
+[node name="Shield" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="FrontShield" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="FrontShieldSprite" type="Sprite" parent="FrontShield"]
+position = Vector2( 0, 7.678 )
+texture = ExtResource( 3 )
+
+[node name="FrontShieldArea" type="Area2D" parent="FrontShield"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontShield/FrontShieldArea"]
+position = Vector2( 0, 7.924 )
+shape = SubResource( 1 )
+
+[node name="BackShield" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="BackShieldSprite" type="Sprite" parent="BackShield"]
+position = Vector2( 0, -2.491 )
+texture = ExtResource( 4 )
+
+[node name="BackShieldArea" type="Area2D" parent="BackShield"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackShield/BackShieldArea"]
+position = Vector2( 0, -3.19 )
+shape = SubResource( 2 )
+
+[node name="LeftShield" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 6 )
+
+[node name="LeftShieldSprite" type="Sprite" parent="LeftShield"]
+position = Vector2( -9, 0 )
+texture = ExtResource( 2 )
+
+[node name="LeftShieldArea" type="Area2D" parent="LeftShield"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftShield/LeftShieldArea"]
+position = Vector2( -8, 0 )
+shape = SubResource( 3 )
+
+[node name="RightShield" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 6 )
+
+[node name="RightShieldSprite" type="Sprite" parent="RightShield"]
+position = Vector2( 9, 0 )
+texture = ExtResource( 1 )
+
+[node name="RightShieldArea" type="Area2D" parent="RightShield"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightShield/RightShieldArea"]
+position = Vector2( 8, 0 )
+shape = SubResource( 3 )
+[connection signal="area_entered" from="FrontShield/FrontShieldArea" to="." method="_on_FrontShieldArea_area_entered"]
+[connection signal="area_entered" from="BackShield/BackShieldArea" to="." method="_on_BackShieldArea_area_entered"]
+[connection signal="area_entered" from="LeftShield/LeftShieldArea" to="." method="_on_LeftShieldArea_area_entered"]
+[connection signal="area_entered" from="RightShield/RightShieldArea" to="." method="_on_RightShieldArea_area_entered"]

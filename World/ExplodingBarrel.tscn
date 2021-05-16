@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://World/ExplodingBarrel.gd" type="Script" id=1]
+[ext_resource path="res://World/Exploding Barrel.png" type="Texture" id=2]
+[ext_resource path="res://Hurtboxes + Hitboxes/Hitbox.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.91617
+height = 3.70318
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 2.59349
+
+[node name="ExplodingBarrel" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 7, 8.5 )
+
+[node name="BarrelHurtBox" type="Area2D" parent="."]
+position = Vector2( 7.023, 8.334 )
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelHurtBox"]
+shape = SubResource( 1 )
+
+[node name="BarrelHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 73
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelHitBox"]
+position = Vector2( 7.007, 8.474 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="BarrelHurtBox" to="." method="_on_BarrelHurtBox_area_entered"]
+[connection signal="area_entered" from="BarrelHitBox" to="." method="_on_BarrelHitBox_area_entered"]
+[connection signal="body_entered" from="BarrelHitBox" to="." method="_on_BarrelHitBox_body_entered"]

@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="SpawnPositions" type="Node2D"]
+
+[node name="Top" type="Position2D" parent="."]
+position = Vector2( 176, 48 )
+
+[node name="Right" type="Position2D" parent="."]
+position = Vector2( 304, 112 )
+
+[node name="Bottom" type="Position2D" parent="."]
+position = Vector2( 176, 176 )
+
+[node name="Left" type="Position2D" parent="."]
+position = Vector2( 48, 112 )
+
+[node name="Middle" type="Position2D" parent="."]
+position = Vector2( 176, 112 )
