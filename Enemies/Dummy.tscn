@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Hurtboxes + Hitboxes/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/dummy.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Shield.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.98788
+height = 12.6514
+
+[node name="Dummy" type="KinematicBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1.26, 0 )
+scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 2 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="Shield" parent="." instance=ExtResource( 3 )]
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

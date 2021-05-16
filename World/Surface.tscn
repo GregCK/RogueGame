@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://World/Hole.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Surface.gd" type="Script" id=3]
+
+[node name="Surface" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Hole" parent="." instance=ExtResource( 1 )]
+position = Vector2( 154.326, 152.827 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 154.002, 54.1089 )
