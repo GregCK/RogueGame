@@ -258,10 +258,10 @@ func set_player_position():
 func spawn_enemies():
 	var enemeiesArray = []
 
-	for i in range(1):
+	for i in range(0):
 		enemeiesArray.append("Eyestalker")
 		
-	for i in range(0):
+	for i in range(1):
 		enemeiesArray.append("Bat")
 		
 	for i in range(0):
@@ -270,7 +270,7 @@ func spawn_enemies():
 	for i in range(0):
 		enemeiesArray.append("Pig")
 		
-	for i in range(1):
+	for i in range(0):
 		enemeiesArray.append("ShieldPig")
 	
 	

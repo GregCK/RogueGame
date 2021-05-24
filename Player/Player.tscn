@@ -122,12 +122,12 @@ tracks/0/keys = {
 radius = 2.75581
 height = 11.289
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=35]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
 
-[sub_resource type="CircleShape2D" id=32]
+[sub_resource type="CircleShape2D" id=9]
 radius = 8.81841
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=10]
 resource_name = "Start"
 length = 0.2
 loop = true
@@ -144,7 +144,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=11]
 resource_name = "Stop"
 length = 0.1
 tracks/0/type = "value"
@@ -168,7 +168,7 @@ script = ExtResource( 2 )
 material = SubResource( 1 )
 texture = ExtResource( 1 )
 hframes = 8
-frame = 6
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 2 )
@@ -188,14 +188,14 @@ rotation = 1.5708
 [node name="Sword" parent="HitboxPivot" instance=ExtResource( 3 )]
 
 [node name="AnimationTree" parent="HitboxPivot/Sword" index="3"]
-parameters/playback = SubResource( 35 )
+parameters/playback = SubResource( 8 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0.471947, -0.613612 )
-shape = SubResource( 32 )
+shape = SubResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 smoothing_enabled = true
@@ -209,20 +209,21 @@ stream = ExtResource( 10 )
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 
 [node name="BlinkAnimationPlayer2" parent="." instance=ExtResource( 12 )]
-anims/Start = SubResource( 33 )
-anims/Stop = SubResource( 34 )
+anims/Start = SubResource( 10 )
+anims/Stop = SubResource( 11 )
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="ShieldHitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
-
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 
 [editable path="HitboxPivot/Sword"]
+
 [editable path="HitboxPivot/Sword/SwordHitBox"]
+
 [editable path="Hurtbox"]
