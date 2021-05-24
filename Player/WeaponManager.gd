@@ -9,13 +9,14 @@ onready var swordAnimationTree = $Sword/AnimationTree
 onready var knfie = $Knife
 
 onready var weapon_queue = [sword, knfie]
-
+var curr_weapon = 0
 
 func _ready():
 	var player = get_parent().get_parent()
 	
 	for weapon in weapon_queue:
 		weapon.connect("attack_done", player, "attack_animation_finished")
+		weapon.connect("attack_done", self, "increment_weapon")
 		
 		var weaponHitBox = weapon.get_node("SwordHitBox")
 		weaponHitBox.connect("stun_player", player, "stun")
@@ -24,7 +25,7 @@ func _ready():
 
 
 func attack():
-	if weapon_queue[0].attack():
+	if weapon_queue[curr_weapon].attack():
 		return true
 	else:
 		return false
@@ -52,3 +53,6 @@ func set_hitbox_direction(new_direction:Vector2):
 	for weapon in weapon_queue:
 		var weaponHitBox = weapon.get_node("SwordHitBox")
 		weaponHitBox.direction = new_direction
+
+func increment_weapon():
+	pass
