@@ -9,7 +9,7 @@ onready var swordTimer = $SwordTimer
 onready var swordSound1 = $SwordSound1
 onready var swordSound2 = $SwordSound2
 
-
+signal attack_done
 
 var isAttacking = false
 var swingNumber = 0
@@ -39,6 +39,7 @@ func attack():
 
 
 func attack_animation_finished():
+	emit_signal("attack_done")
 	isAttacking = false
 	swordAnimationState.travel("Idle")
 	swordTimer.start(1)

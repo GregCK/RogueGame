@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/guySS.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/Sword.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/WeaponManager.gd" type="Script" id=4]
 [ext_resource path="res://Hurtboxes + Hitboxes/Hurtbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Knife.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Music and Sounds/Evade.wav" type="AudioStream" id=10]
 [ext_resource path="res://WhiteColor.shader" type="Shader" id=11]
 [ext_resource path="res://Effects/BlinkAnimationPlayer.tscn" type="PackedScene" id=12]
@@ -122,12 +124,10 @@ tracks/0/keys = {
 radius = 2.75581
 height = 11.289
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
-
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=8]
 radius = 8.81841
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "Start"
 length = 0.2
 loop = true
@@ -144,7 +144,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "Stop"
 length = 0.1
 tracks/0/type = "value"
@@ -185,17 +185,19 @@ shape = SubResource( 7 )
 [node name="HitboxPivot" type="Position2D" parent="."]
 rotation = 1.5708
 
-[node name="Sword" parent="HitboxPivot" instance=ExtResource( 3 )]
+[node name="WeaponManager" type="Node2D" parent="HitboxPivot"]
+script = ExtResource( 4 )
 
-[node name="AnimationTree" parent="HitboxPivot/Sword" index="3"]
-parameters/playback = SubResource( 8 )
+[node name="Sword" parent="HitboxPivot/WeaponManager" instance=ExtResource( 3 )]
+
+[node name="Knife" parent="HitboxPivot/WeaponManager" instance=ExtResource( 6 )]
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0.471947, -0.613612 )
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 smoothing_enabled = true
@@ -209,8 +211,8 @@ stream = ExtResource( 10 )
 [node name="BlinkAnimationPlayer" parent="." instance=ExtResource( 12 )]
 
 [node name="BlinkAnimationPlayer2" parent="." instance=ExtResource( 12 )]
-anims/Start = SubResource( 10 )
-anims/Stop = SubResource( 11 )
+anims/Start = SubResource( 9 )
+anims/Stop = SubResource( 10 )
 
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
@@ -221,9 +223,5 @@ stream = ExtResource( 13 )
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-
-[editable path="HitboxPivot/Sword"]
-
-[editable path="HitboxPivot/Sword/SwordHitBox"]
 
 [editable path="Hurtbox"]

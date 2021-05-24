@@ -26,10 +26,9 @@ const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
 onready var animationPlayer = $AnimationPlayer
 
-onready var sword = $HitboxPivot/Sword
-onready var swordHitBox = $HitboxPivot/Sword/SwordHitBox
-onready var swordCollisionShape = $HitboxPivot/Sword/SwordHitBox/CollisionShape2D
-onready var swordAnimationTree = $HitboxPivot/Sword/AnimationTree
+onready var weaponManager = $HitboxPivot/WeaponManager
+
+
 
 onready var hurtbox = $Hurtbox
 onready var hurtboxCollisionShape = $Hurtbox/CollisionShape2D
@@ -48,8 +47,9 @@ func _ready():
 	
 	stats.connect("no_health", self, "queue_free")
 	stats.connect("no_health", self, "restart_game")
-	swordHitBox.knockback_vector = rollVector
-	swordHitBox.connect("stun_player", self, "stun")
+#	swordHitBox.knockback_vector = rollVector
+	weaponManager.set_knockback_vector(rollVector)
+#	swordHitBox.connect("stun_player", self, "stun")
 	stunTimer.connect("timeout", self, "end_stun")
 
 func restart_game():
@@ -60,7 +60,8 @@ func stun():
 	state = STUN
 	stunTimer.start(1)
 #	swordCollisionShape.disabled = true
-	swordCollisionShape.set_deferred("disabled", true)
+#	swordCollisionShape.set_deferred("disabled", true)
+	weaponManager.disabled_collision_shapes()
 	animationPlayer.play("Stun")
 	shieldHitSound.play()
 	blinkAnimationPlayer2.play("Start")
@@ -94,10 +95,14 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		rollVector = input_vector
-		swordHitBox.knockback_vector = rollVector
+#		swordHitBox.knockback_vector = rollVector
+		weaponManager.set_knockback_vector(rollVector)
 		set_flip(input_vector)
-		swordAnimationTree.set("parameters/Attack/blend_position", input_vector)
-		swordHitBox.direction = input_vector
+#		swordAnimationTree.set("parameters/Attack/blend_position", input_vector)
+		weaponManager.set_blend_positions(input_vector)
+		
+#		swordHitBox.direction = input_vector
+		weaponManager.set_hitbox_direction(input_vector)
 		animationPlayer.play("Run")
 		if !Input.is_action_pressed("hold"):
 			velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -132,7 +137,8 @@ func roll_state(delta):
 func attack_state(delta):
 	
 	
-	if sword.attack():
+#	if sword.attack():
+	if weaponManager.attack():
 		velocity = velocity / 2
 		animationPlayer.play("Attack")
 	
